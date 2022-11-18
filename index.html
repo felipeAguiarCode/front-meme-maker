@@ -13,14 +13,13 @@
 
   <div class="container">
 
-    <div class="app">
+    <div class="app" id="downlabled">
 
       <div class="logo">
         <img src="pictures/logo.png" alt="">
       </div>
 
       <div class="app-image">
-
           <textarea
             name=""
             class="text-box"
@@ -41,8 +40,10 @@
 
       <div class="app-photo-picker">
 
-        <select id="memes-list">
-          <option value="1">RENAN DA UM AUMENTO PRO FELIPÃO</option>
+        <select 
+          id="memes-list"
+          onchange="changeMemePicture(this.value)"
+        >
         </select>
 
         <input 
@@ -61,6 +62,27 @@
 
   </div>
 
+
+  <script src="./javascript/scripts.js"></script>
+  <script src="./javascript/html2Canvas.js"></script>
+  <script>
+
+    document.getElementById("btn-download").onclick = () =>{
+      const screenshotPrint = document.querySelector("#downlabled")
+
+      html2canvas(screenshotPrint).then((canvas)=>{
+        const base64Image = canvas.toDataURL("image/png")
+        let anchor = document.createElement("a")
+        anchor.setAttribute("href", base64Image)
+        anchor.setAttribute("download", "my-meme.png")
+        anchor.click()
+        anchor.remove()
+      })
+
+    }
+    
+
+  </script>
 </body>
 
 
